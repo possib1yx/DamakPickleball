@@ -1,6 +1,6 @@
 // app.js — Booking form handler
 
-const BACKEND_URL = 'http://localhost:3000'; // Change this to your deployed backend URL
+const BACKEND_URL = 'https://damakpickleball.onrender.com'; // Change this to your deployed backend URL
 
 const form = document.getElementById('booking-form');
 if (!form) throw new Error('Booking form not found');
