@@ -61,7 +61,7 @@
   <nav class="hero-bg text-white sticky top-0 z-50 shadow-lg">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3">
-        <span class="text-2xl">🏓</span>
+        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path></svg>
         <span class="text-xl font-extrabold">Damak <span class="text-accent">Pickleball</span></span>
       </a>
       <a href="index.html" class="text-green-200 hover:text-white text-sm font-semibold transition-colors">← Back to Home</a>
@@ -85,7 +85,7 @@
 
       <div class="animate-fade-up" style="animation-delay:0.4s;">
         <h1 class="text-4xl md:text-5xl font-black text-dark mb-4">
-          Booking <span class="shimmer-text">Confirmed!</span> ✅
+          Booking <span class="shimmer-text">Confirmed!</span> 
         </h1>
         <p class="text-gray-500 text-lg mb-8 leading-relaxed">
           Your pickleball court has been successfully booked. The owner has been notified and will contact you shortly to confirm the details.
@@ -94,7 +94,7 @@
         <!-- Summary card -->
         <div class="bg-white rounded-3xl shadow-xl p-8 mb-8 border border-green-100 text-left">
           <h2 class="text-lg font-bold text-dark mb-4 flex items-center gap-2">
-            <span>📋</span> What happens next?
+            <span></span> What happens next?
           </h2>
           <div class="space-y-4">
             <div class="flex items-start gap-4">
@@ -115,7 +115,7 @@
               <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-sm flex-shrink-0 mt-0.5">3</div>
               <div>
                 <p class="font-semibold text-gray-800 text-sm">Show Up & Play!</p>
-                <p class="text-gray-500 text-sm">Arrive on time, grab a paddle, and enjoy the game! 🏓</p>
+                <p class="text-gray-500 text-sm">Arrive on time, grab a paddle, and enjoy the game! </p>
               </div>
             </div>
           </div>
@@ -124,18 +124,18 @@
         <!-- Action buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="booking.html" id="book-again-btn" class="btn-primary text-white px-8 py-4 rounded-2xl font-bold text-base">
-            📅 Book Another Slot
+             Book Another Slot
           </a>
           <a href="index.html" id="home-btn" class="border-2 border-primary text-primary px-8 py-4 rounded-2xl font-bold text-base hover:bg-primary hover:text-white transition-all duration-300">
-            🏠 Back to Home
+             Back to Home
           </a>
         </div>
 
         <!-- Contact quick links -->
         <div class="mt-8 flex items-center justify-center gap-6 text-sm text-gray-500">
-          <a href="tel:9852623369" class="hover:text-primary transition-colors">📞 9852623369</a>
+          <a href="tel:9852623369" class="hover:text-primary transition-colors"> 9852623369</a>
           <span class="text-gray-300">|</span>
-          <a href="https://wa.me/9779852623369" target="_blank" rel="noopener noreferrer" class="hover:text-[#25D366] transition-colors">💬 WhatsApp</a>
+          <a href="https://wa.me/9779852623369" target="_blank" rel="noopener noreferrer" class="hover:text-[#25D366] transition-colors"> WhatsApp</a>
         </div>
       </div>
     </div>
@@ -179,7 +179,7 @@
       const summaryEl = document.createElement('div');
       summaryEl.className = 'mb-6 p-4 bg-green-50 rounded-2xl border border-green-100 text-sm text-gray-700';
       summaryEl.innerHTML = `
-        <p class="font-semibold text-dark mb-2">📝 Your Booking Summary</p>
+        <p class="font-semibold text-dark mb-2"> Your Booking Summary</p>
         <p><span class="font-medium">Name:</span> ${params.get('name')}</p>
         <p><span class="font-medium">Date:</span> ${params.get('date') || 'N/A'}</p>
         <p><span class="font-medium">Time:</span> ${params.get('time') || 'N/A'}</p>

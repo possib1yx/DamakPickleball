@@ -45,7 +45,7 @@ function validateForm(data) {
 
 function setLoading(loading) {
   submitBtn.disabled = loading;
-  btnText.textContent = loading ? 'Sending...' : 'Confirm Booking 🏓';
+  btnText.textContent = loading ? 'Sending...' : 'Confirm Booking ';
   spinner.style.display = loading ? 'block' : 'none';
 }
 
