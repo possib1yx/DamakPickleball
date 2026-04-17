@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Court — Damak Pickleball</title>
+  <meta name="description" content="Fill out the form to book your pickleball court at Damak Pickleball. Choose your date, time slot, and we'll confirm quickly." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { primary: '#22c55e', accent: '#facc15', dark: '#14532d' },
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          keyframes: {
+            fadeUp: { '0%': { opacity:'0', transform:'translateY(20px)' }, '100%': { opacity:'1', transform:'translateY(0)' } }
+          },
+          animation: { 'fade-up': 'fadeUp 0.6s ease both' }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    .hero-bg { background: linear-gradient(135deg,#14532d 0%,#166534 50%,#15803d 100%); }
+    .glass { background:rgba(255,255,255,0.08); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15); }
+    .btn-primary { background:linear-gradient(135deg,#22c55e,#16a34a); transition:all .3s; box-shadow:0 4px 20px rgba(34,197,94,.4); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(34,197,94,.5); }
+    .form-input {
+      width:100%; padding:0.75rem 1rem; border:2px solid #e5e7eb; border-radius:0.75rem;
+      font-size:0.95rem; transition:border-color .2s, box-shadow .2s; outline:none; background:#fff;
+    }
+    .form-input:focus { border-color:#22c55e; box-shadow:0 0 0 3px rgba(34,197,94,.15); }
+    .form-input.error { border-color:#ef4444; }
+    .shimmer-text { background:linear-gradient(90deg,#facc15,#fef08a,#facc15); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:shimmer 3s linear infinite; }
+    @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+    .spinner { border:3px solid rgba(255,255,255,.3); border-top-color:#fff; border-radius:50%; width:20px; height:20px; animation:spin .8s linear infinite; display:none; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+  </style>
+</head>
+<body class="font-sans bg-gray-50 min-h-screen">
+
+  <!-- NAVBAR -->
+  <nav class="hero-bg text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <span class="text-2xl">🏓</span>
+        <span class="text-xl font-extrabold">Damak <span class="text-accent">Pickleball</span></span>
+      </a>
+      <a href="index.html" class="text-green-200 hover:text-white text-sm font-semibold transition-colors">← Back to Home</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="hero-bg py-16 text-center text-white">
+    <h1 class="text-4xl md:text-5xl font-black mb-3">Book Your <span class="shimmer-text">Court</span></h1>
+    <p class="text-green-100 text-lg">Fill in your details below and we'll confirm your slot.</p>
+  </div>
+
+  <!-- BOOKING FORM -->
+  <section class="py-16 px-6">
+    <div class="max-w-2xl mx-auto">
+      <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 animate-fade-up border border-green-50">
+
+        <!-- Progress indicator -->
+        <div class="flex items-center justify-center gap-2 mb-10">
+          <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">1</div>
+          <div class="w-16 h-1 bg-green-200 rounded"></div>
+          <div class="w-8 h-8 rounded-full bg-green-100 text-gray-400 flex items-center justify-center text-sm font-bold">2</div>
+          <div class="w-16 h-1 bg-green-200 rounded"></div>
+          <div class="w-8 h-8 rounded-full bg-green-100 text-gray-400 flex items-center justify-center text-sm font-bold">✓</div>
+        </div>
+
+        <!-- Error banner -->
+        <div id="error-banner" class="hidden mb-6 bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 text-sm font-medium"></div>
+
+        <form id="booking-form" novalidate>
+          <!-- Name -->
+          <div class="mb-5">
+            <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Full Name <span class="text-red-400">*</span></label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="e.g. John Doe" required />
+            <p class="text-red-500 text-xs mt-1 hidden" id="name-err">Please enter your full name.</p>
+          </div>
+
+          <!-- Phone -->
+          <div class="mb-5">
+            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">Phone Number <span class="text-red-400">*</span></label>
+            <input type="tel" id="phone" name="phone" class="form-input" placeholder="e.g. 98XXXXXXXX" required />
+            <p class="text-red-500 text-xs mt-1 hidden" id="phone-err">Please enter a valid phone number.</p>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-5">
+            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address <span class="text-red-400">*</span></label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="e.g. john@email.com" required />
+            <p class="text-red-500 text-xs mt-1 hidden" id="email-err">Please enter a valid email address.</p>
+          </div>
+
+          <!-- Date & Time (2 columns) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label for="date" class="block text-sm font-semibold text-gray-700 mb-2">Date <span class="text-red-400">*</span></label>
+              <input type="date" id="date" name="date" class="form-input" required />
+              <p class="text-red-500 text-xs mt-1 hidden" id="date-err">Please select a date.</p>
+            </div>
+            <div>
+              <label for="time" class="block text-sm font-semibold text-gray-700 mb-2">Time Slot <span class="text-red-400">*</span></label>
+              <select id="time" name="time" class="form-input" required>
+                <option value="">Select a time</option>
+                <option>6:00 AM – 7:00 AM</option>
+                <option>7:00 AM – 8:00 AM</option>
+                <option>8:00 AM – 9:00 AM</option>
+                <option>9:00 AM – 10:00 AM</option>
+                <option>10:00 AM – 11:00 AM</option>
+                <option>4:00 PM – 5:00 PM</option>
+                <option>5:00 PM – 6:00 PM</option>
+                <option>6:00 PM – 7:00 PM</option>
+                <option>7:00 PM – 8:00 PM</option>
+                <option>8:00 PM – 9:00 PM</option>
+              </select>
+              <p class="text-red-500 text-xs mt-1 hidden" id="time-err">Please select a time slot.</p>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="mb-8">
+            <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Message <span class="text-gray-400 font-normal">(optional)</span></label>
+            <textarea id="message" name="message" rows="3" class="form-input resize-none" placeholder="Any special requests or notes..."></textarea>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" id="submit-btn" class="btn-primary w-full text-white py-4 rounded-2xl text-lg font-bold flex items-center justify-center gap-3">
+            <span id="btn-text">Confirm Booking 🏓</span>
+            <div class="spinner" id="spinner"></div>
+          </button>
+
+          <p class="text-center text-gray-400 text-xs mt-4">By submitting, the owner will be notified via email and will contact you to confirm.</p>
+        </form>
+      </div>
+
+      <!-- Contact info below form -->
+      <div class="mt-8 bg-white rounded-2xl p-6 shadow-md border border-green-50 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-gray-600">
+        <a href="tel:9852623369" class="flex items-center gap-2 hover:text-primary transition-colors font-medium"><span>📞</span> 9852623369</a>
+        <a href="https://www.instagram.com/wassaps08/?hl=en" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-primary transition-colors font-medium"><span>📸</span> @wassaps08</a>
+        <a href="https://wa.me/9779852623369" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-[#25D366] transition-colors font-medium"><span>💬</span> WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-dark text-green-300 py-6 text-center text-sm mt-4">
+    <p>© 2026 Damak Pickleball. All rights reserved.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    // Set min date to today
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+  </script>
+</body>
+</html>
