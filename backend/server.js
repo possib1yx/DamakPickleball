@@ -49,7 +49,7 @@ app.post('/api/book', bookingLimiter, async (req, res) => {
   if (!phone || !phoneRegex.test(phone.trim())) {
     return res.status(400).json({ success: false, message: 'A valid phone number is required.' });
   }
-  if (!email || !emailRegex.test(email.trim())) {
+  if (email && !emailRegex.test(email.trim())) {
     return res.status(400).json({ success: false, message: 'A valid email address is required.' });
   }
   if (!date) {
@@ -81,9 +81,11 @@ app.post('/api/book', bookingLimiter, async (req, res) => {
     await sendBookingEmail(bookingData);
 
     // Send confirmation to customer (non-blocking; don't fail if this fails)
-    sendConfirmationEmail(bookingData).catch(err => {
-      console.error('Confirmation email failed (non-critical):', err.message);
-    });
+    if (bookingData.email) {
+      sendConfirmationEmail(bookingData).catch(err => {
+        console.error('Confirmation email failed (non-critical):', err.message);
+      });
+    }
 
     console.log(`✅ Booking received: ${bookingData.name} — ${bookingData.date} ${bookingData.time}`);
 

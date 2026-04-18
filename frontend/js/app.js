@@ -34,10 +34,21 @@ function validateForm(data) {
   const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneReg = /^[0-9]{7,15}$/;
 
+  const d = new Date();
+  const localToday = new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+
   if (!data.name.trim()) { showError('name', true); valid = false; } else showError('name', false);
   if (!phoneReg.test(data.phone.trim())) { showError('phone', true); valid = false; } else showError('phone', false);
-  if (!emailReg.test(data.email.trim())) { showError('email', true); valid = false; } else showError('email', false);
-  if (!data.date) { showError('date', true); valid = false; } else showError('date', false);
+  if (data.email.trim() && !emailReg.test(data.email.trim())) { showError('email', true); valid = false; } else showError('email', false);
+  
+  if (!data.date || data.date < localToday) { 
+    showError('date', true); 
+    fields.date.err.textContent = !data.date ? 'Please select a date.' : 'Past dates cannot be selected.';
+    valid = false; 
+  } else { 
+    showError('date', false); 
+  }
+  
   if (!data.time) { showError('time', true); valid = false; } else showError('time', false);
 
   return valid;
@@ -114,10 +125,20 @@ Object.keys(fields).forEach(key => {
     };
     const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneReg = /^[0-9]{7,15}$/;
+    
+    const d = new Date();
+    const localToday = new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+
     if (key === 'name') showError('name', !data.name.trim());
     if (key === 'phone') showError('phone', !phoneReg.test(data.phone.trim()));
-    if (key === 'email') showError('email', !emailReg.test(data.email.trim()));
-    if (key === 'date') showError('date', !data.date);
+    if (key === 'email') showError('email', data.email.trim() && !emailReg.test(data.email.trim()));
+    if (key === 'date') {
+      const isInvalid = !data.date || data.date < localToday;
+      showError('date', isInvalid);
+      if (isInvalid) {
+        fields.date.err.textContent = !data.date ? 'Please select a date.' : 'Past dates cannot be selected.';
+      }
+    }
     if (key === 'time') showError('time', !data.time);
   });
 });
